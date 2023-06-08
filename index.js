@@ -14,7 +14,7 @@
 
 const cakes = (recipe, available) => {
     let totalQuanity = [] 
-    
+
     for(let el of Object.keys(recipe)){
         if(available[el]){
             let quantity = Math.floor(available[el]/recipe[el])
@@ -25,6 +25,24 @@ const cakes = (recipe, available) => {
     }
 
     return Math.min(...totalQuanity)
+}
+
+cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200})
+
+//Solution 2
+
+const cakes = (recipe, available) => {
+    let recipeKeysArr = Object.keys(recipe)
+    
+    recipeKeysArr = recipeKeysArr.map((key) => {
+        if(available[key]){
+            return Math.floor(available[key]/recipe[key]) 
+        }else{
+            return 0
+        }
+    })
+    
+    return Math.min(...recipeKeysArr)
 }
 
 cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200})
